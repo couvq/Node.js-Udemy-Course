@@ -1,6 +1,8 @@
 const express = require('express');
 const app = express();
 
+app.use(express.json());
+
 // data will be dummy as an array for now just to practice with express
 const courses = [
     { id: 1, name: 'Course1'},
@@ -35,6 +37,17 @@ app.get('/api/courses/:id', (req, res) => {
         // we did not find the course with given id!
         res.status(404).send(`Sorry! We couldn't find a course with id of ${id}.`);
     }
+});
+
+// POST request to create a new course
+app.post('/api/courses', (req, res) => {
+    const course = {
+        id: courses.length + 1,
+        name: req.body.name
+    }
+
+    courses.push(course);
+    res.send(course);
 });
 
 const port = process.env.PORT || 3000;
