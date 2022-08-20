@@ -80,6 +80,26 @@ app.put('/api/courses/:id', (req, res) => {
     res.status(404).send(`Sorry! We couldn't find a course with id of ${courseIdToUpdate}.`);
 });
 
+// DELETE request handler to delete a course with a given id
+app.delete('/api/courses/:id', (req, res) => {
+    // find course and delete it if id is valid
+
+    const courseIdToDelete = parseInt(req.params.id);
+
+    for(let course of courses) {
+        if(course.id === courseIdToDelete) {
+            let index = courses.indexOf(course);
+
+            courses.splice(index, 1); // delete this course
+            res.send(course);
+            return;
+        }
+    }
+
+    // otherwise we did not find course with that id
+    res.status(404).send(`Sorry! We couldn't find a course with id of ${courseIdToDelete}`);
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`);
