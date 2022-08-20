@@ -63,6 +63,23 @@ app.post('/api/courses', (req, res) => {
     res.send(course);
 });
 
+// PUT request handler to update a course by id 'change the name'
+app.put('/api/courses/:id', (req, res) => {
+    const courseIdToUpdate = parseInt(req.params.id);
+
+    for(let course of courses) {
+        if(course.id === courseIdToUpdate) {
+            course.name = req.body.name;
+
+            res.send(course);
+            return;
+        }
+    }
+
+    // otherwise we did not find course with that id
+    res.status(404).send(`Sorry! We couldn't find a course with id of ${courseIdToUpdate}.`);
+});
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Listening on Port ${port}`);
