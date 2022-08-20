@@ -12,7 +12,12 @@ const courses = [
 ];
 
 app.get('/', (req, res) => {
-    res.send('Hello World');
+    res.send(`
+        <html>
+        <head><title>My Dummy REST API</title></head>
+        <body><h1>This is my Dummy REST API</h1></body>
+        </html>
+    `);
 });
 
 app.get('/api/courses', (req, res) => {
