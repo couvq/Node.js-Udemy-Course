@@ -33,7 +33,7 @@ app.get('/api/courses/:id', (req, res) => {
         res.send(matchingCourse);
     } else {
         // we did not find the course with given id!
-        res.send(`Sorry! We couldn't find a course with that id.`);
+        res.send(`Sorry! We couldn't find a course with id of ${id}.`);
     }
 });
 
